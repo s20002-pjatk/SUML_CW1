@@ -50,8 +50,8 @@ with st.echo():
     st.write("Echo")
 # możemy też to zrobić prościej używając echo - pokazujemy kod i równocześnie go wykonujemy
 
-df = pd.read_csv("cwiczenie_1.csv", sep = ';')
-st.dataframe(df)
+#df = pd.read_csv("cwiczenie_1.csv", sep = ';')
+#st.dataframe(df)
 # musimy tylko pamiętaćo właściwym określeniu separatora (w tym wypadku to średnik)
 # masz problem z otworzeniem pliku? sprawdź w jakim katalogu pracujesz i dodaj tam plik (albo co bardziej korzystne - zmień katalog pracy)
 # os.getcwd() # pokaż bieżący katalog
