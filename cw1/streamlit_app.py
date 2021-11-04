@@ -4,14 +4,17 @@ from transformers import pipeline
 import time
 import matplotlib as plt
 import os
+import json
+import keyboard
 # zaczynamy od zaimportowania bibliotek
 
 st.success('Gratulacje! Z powodzeniem uruchomiłeś aplikację')
+
 # streamlit jest wykorzystywany do tworzenia aplikacji
 # z tego powodu dobrą praktyką jest informowanie użytkownika o postępie, błędach, etc.
 
 # Inne przykłady do wypróbowania:
-# st.balloons() # animowane balony ;)
+#st.balloons() # animowane balony ;)
 # st.error('Błąd!') # wyświetla informację o błędzie
 # st.warning('Ostrzeżenie, działa, ale chyba tak sobie...')
 # st.info('Informacja...')
@@ -24,18 +27,20 @@ st.success('Gratulacje! Z powodzeniem uruchomiłeś aplikację')
 # możemy dzięki temu "ukryć" późniejsze ładowanie aplikacji
 
 st.title('Zajęcia 1. Tłumacz angielsko-niemiecki')
+st.image('flag.png')
 # title, jak sama nazwa wskazuje, używamy do wyświetlenia tytułu naszej aplikacji
 
 st.header('nr indeksu s20002')
 # header to jeden z podtytułów wykorzystywnaych w Streamlit
 
-st.subheader('O Streamlit')
+st.subheader('O Aplikacji')
 # subheader to jeden z podtytułów wykorzystywnaych w Streamlit
 
-st.text('To przykładowa aplikacja z wykorzystaniem Streamlit')
+st.text('To przykładowa aplikacja z wykorzystaniem Streamlit.')
 # text używamy do wyświetlenia dowolnego tekstu. Można korzystać z polskich znaków.
 
 st.write('Streamlit jest biblioteką pozwalającą na uruchomienie modeli uczenia maszynowego.')
+st.write('Aplikacja pozwala na interpretację wydźwięku emocjonalnego tekstu oraz posiada funkcję tłumacza angielsko-niemieckiego')
 # write używamy również do wyświetlenia tekstu, różnica polega na formatowaniu.
 
 st.code("st.write()", language='python')
@@ -54,8 +59,8 @@ st.dataframe(df)
 
 st.header('Przetwarzanie języka naturalnego')
 
-import streamlit as st
-from transformers import pipeline
+#import streamlit as st
+#from transformers import pipeline
 
 option = st.selectbox(
     "Opcje",
@@ -69,22 +74,26 @@ option = st.selectbox(
 text = st.text_area(label="Wpisz tekst")
 
 if option == "Wydźwięk emocjonalny tekstu (eng)":
+    if keyboard.is_pressed("Ctrl") and keyboard.is_pressed("Enter"):
+         with st.spinner('Recognition in progress...'):
+            time.sleep(5)
 
-    if text:
-        ##info = "Loading..."
-        ##st.write(info)
-        classifier = pipeline("sentiment-analysis")
-        answer = classifier(text)
-        st.write(answer)
-        ##info = ""
-        ##st.write(info)
-elif option == "Tłumacz eng to de":
-    ##st.write("Loading...")
-    translator = pipeline("translation_en_to_de")
-    translation=translator(text, max_length=40)
-    st.write(translation)
-    if translation[0] == text:
-        st.error('Translation failed. Please, recheck the word')
+            classifier = pipeline("sentiment-analysis")
+            answer = classifier(text)
+            st.write(answer)
+
+if option == "Tłumacz eng to de":
+    if keyboard.is_pressed("Ctrl") and keyboard.is_pressed("Enter"):
+         with st.spinner('Translation in progress...'):
+             time.sleep(5)
+             translator = pipeline("translation_en_to_de")
+             translation = translator(text, max_length=40)
+             word = translation[0]['translation_text']
+             if word == text:
+                 st.error('Translation failed. Please, recheck the word')
+             else:
+                 st.success('Translation successful')
+                 st.write(translation)
 
 ##print(translator("Hugging Face is a technology company based in New York and Paris", max_length=40))
 ##print(translator(text, max_length=40))
