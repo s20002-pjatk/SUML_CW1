@@ -74,7 +74,7 @@ option = st.selectbox(
 text = st.text_area(label="Wpisz tekst")
 
 if option == "Wydźwięk emocjonalny tekstu (eng)":
-    if keyboard.is_pressed("Ctrl") and keyboard.is_pressed("Enter"):
+    #if keyboard.is_pressed("Ctrl") and keyboard.is_pressed("Enter"):
          with st.spinner('Recognition in progress...'):
             time.sleep(5)
 
@@ -83,7 +83,7 @@ if option == "Wydźwięk emocjonalny tekstu (eng)":
             st.write(answer)
 
 if option == "Tłumacz eng to de":
-    if keyboard.is_pressed("Ctrl") and keyboard.is_pressed("Enter"):
+    #if keyboard.is_pressed("Ctrl") and keyboard.is_pressed("Enter"):
          with st.spinner('Translation in progress...'):
              time.sleep(5)
              translator = pipeline("translation_en_to_de")
