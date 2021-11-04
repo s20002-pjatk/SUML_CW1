@@ -27,7 +27,7 @@ st.success('Gratulacje! Z powodzeniem uruchomiłeś aplikację')
 # możemy dzięki temu "ukryć" późniejsze ładowanie aplikacji
 
 st.title('Zajęcia 1. Tłumacz angielsko-niemiecki')
-st.image('flag.png')
+st.image('https://upload.wikimedia.org/wikipedia/commons/0/0c/Flag_of_the_United_Kingdom_and_Germany.png')
 # title, jak sama nazwa wskazuje, używamy do wyświetlenia tytułu naszej aplikacji
 
 st.header('nr indeksu s20002')
